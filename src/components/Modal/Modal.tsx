@@ -6,7 +6,14 @@ export const Modal = () => {
 
   const { title, color, icon, cancel } = MODAL_OPTIONS[modal.modalType];
 
-  const onClosingModal = () => {
+  const onCloseModal = () => {
+    if (modal.modalType !== 'warning') {
+      modal.callback && modal.callback();
+    }
+    closeModal();
+  };
+
+  const onContinue = () => {
     modal.callback && modal.callback();
     closeModal();
   };
@@ -20,7 +27,7 @@ export const Modal = () => {
 
           <div
             className='fixed top-0 h-screen w-screen max-w-full bg-black/50 z-0'
-            onClick={closeModal}
+            onClick={onCloseModal}
           ></div>
 
           <div className='bg-white w-full max-w-25rem b-rd-xl px-lg py-2xl text-center shadow-lg shadow-black/10 z-1'>
@@ -46,7 +53,7 @@ export const Modal = () => {
               }
 
               <button
-                onClick={onClosingModal}
+                onClick={onContinue}
                 className={`transition-shadow bg-${color}-500 shadow-md shadow-${color}-500/70 py-1.5 px-6 text-xs b-rd-4 hover:shadow-${color}-500/40`}
               >
                 CONTINUE

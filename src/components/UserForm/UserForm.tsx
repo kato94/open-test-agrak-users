@@ -7,9 +7,10 @@ interface Props {
   isLoading: boolean;
   onSaveUser: (user: User) => void;
   user?: User;
+  onDeleteUser?: () => void;
 }
 
-export const UserForm: FC<Props> = ({ isLoading, onSaveUser, user }) => {
+export const UserForm: FC<Props> = ({ isLoading, onSaveUser, user, onDeleteUser }) => {
   const { error, submit } = useForm();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,18 +49,33 @@ export const UserForm: FC<Props> = ({ isLoading, onSaveUser, user }) => {
           Cancel
         </Link>
 
-        <button
-          disabled={isLoading}
-          type='submit'
-          className='transition-shadow shadow-md shadow-blue-500/70 bg-blue-500 text-white px-xs py-2 rounded-md flex items-center hover:shadow-blue-500/40 disabled:opacity-70'
-        >
+        <div className='flex gap-4'>
           {
-            isLoading
-              ? <span className='i-fluent-arrow-clockwise-16-filled mr-2 inline-block animate-spin'></span>
-              : <span className='i-fluent-save-28-regular mr-2 inline-block'></span>
+            onDeleteUser &&
+              (<button
+                disabled={isLoading}
+                type='button'
+                onClick={onDeleteUser}
+                className='transition-shadow shadow-md shadow-red-500/70 bg-red-500 text-white px-xs py-2 rounded-md flex items-center hover:shadow-red-500/40 disabled:opacity-70'
+              >
+                Delete
+              </button>)
+          }
+
+          <button
+            disabled={isLoading}
+            type='submit'
+            className='transition-shadow shadow-md shadow-blue-500/70 bg-blue-500 text-white px-xs py-2 rounded-md flex items-center hover:shadow-blue-500/40 disabled:opacity-70'
+          >
+            {
+              isLoading
+                ? <span className='i-fluent-arrow-clockwise-16-filled mr-2 inline-block animate-spin'></span>
+                : <span className='i-fluent-save-28-regular mr-2 inline-block'></span>
             }
-          Save
-        </button>
+            Save
+          </button>
+
+        </div>
       </div>
     </form>
   )

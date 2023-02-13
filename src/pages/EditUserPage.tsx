@@ -7,7 +7,7 @@ import { useUserMutation } from '../hooks/useUserMutation';
 
 export const EditUserPage = () => {
 
-  const { userUpdateMutation } = useUserMutation();
+  const { userUpdateMutation, userDeleteMutation } = useUserMutation();
   const { openModal } = useUiStore();
   const navigate = useNavigate();
   const params = useParams();
@@ -34,6 +34,36 @@ export const EditUserPage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const user = userQuery.data as User;
+      await userDeleteMutation.mutateAsync(user.id || '0');
+
+      openModal({
+        modalType: 'success',
+        modalMessage: `User ${user.first_name} ${user.second_name} has been deleted!`,
+        callback: () => {
+          navigate('/');
+        }
+      });
+    } catch (error) {
+      openModal({
+        modalType: 'error',
+        modalMessage: `Something went wrong!`,
+      });
+    }
+  }
+
+  const onDeleteUser = () => {
+    openModal({
+      modalType: 'warning',
+      modalMessage: `Are you sure to delete the user: ${userQuery.data?.first_name}?`,
+      callback: () => {
+        handleDelete();
+      }
+    });
+  };
+
   if (!userQuery.isLoading && !userQuery.data) navigate('/');
 
   return (
@@ -55,6 +85,7 @@ export const EditUserPage = () => {
               user={userQuery.data}
               isLoading={userUpdateMutation.isLoading}
               onSaveUser={onUpdateUser}
+              onDeleteUser={onDeleteUser}
             />)
       }
     </>
