@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../../interfaces/User';
 import { useUiStore } from '../../../hooks/useUiStore';
-import { useUsers } from '../../../hooks/useUsers';
+import { useUserMutation } from '../../../hooks/useUserMutation';
 
 interface Props {
   user: User;
@@ -11,14 +11,14 @@ interface Props {
 export const Item: FC<Props> = ({user}) => {
 
   const { openModal } = useUiStore();
-  const { userDeleteMutation } = useUsers();
+  const { userDeleteMutation } = useUserMutation();
 
   const handleDelete = () => {
     openModal({
       modalType: 'warning',
       modalMessage: `Are you sure to delete the user: ${user.first_name}?`,
       callback: () => {
-        userDeleteMutation.mutate(user.id);
+        userDeleteMutation.mutate(user.id!);
       }
     });
   }

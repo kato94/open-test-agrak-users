@@ -15,9 +15,15 @@ export const Modal = () => {
 
   return (
     <>
-      <div className='fixed top-0 h-screen w-screen max-w-full bg-black/50'>
+      <div className='fixed top-0 h-screen w-screen max-w-full'>
         <div className='pa-4 w-full h-full flex items-center justify-center'>
-          <div className='bg-white w-full max-w-25rem b-rd-xl px-lg py-2xl text-center shadow-lg shadow-black/10'>
+
+          <div
+            className='fixed top-0 h-screen w-screen max-w-full bg-black/50 z-0'
+            onClick={closeModal}
+          ></div>
+
+          <div className='bg-white w-full max-w-25rem b-rd-xl px-lg py-2xl text-center shadow-lg shadow-black/10 z-1'>
 
             <div className={`bg-${color}-500 pa-4 mb-lg rounded-full inline-block`}>
               <span className={`i-${icon} block c-white text-center text-6xl`}></span>

@@ -4,7 +4,7 @@ import { UserTable } from '../components/UserTable';
 
 export const HomePage = () => {
 
-  const {usersQuery} = useUsers();
+  const usersQuery = useUsers();
 
   return (
     <>

@@ -60,4 +60,20 @@ The API endpoint is [Api user](https://635017b9df22c2af7b630c3e.mockapi.io/api/v
 The only deliverable is a link to a public repository with the code of the application. You can use any repository
 hosting service you want (Github, Gitlab, Bitbucket, etc.)
 
-### Feel free to edit this README file to add any information you consider relevant to the solution.
+<br/>
+
+### How to execute the App
+1. Install dependencies
+```node
+pnpm i
+```
+2. Configuring the environment
+
+    Create file .env
+```node
+REACT_APP_API_URL=https://635017b9df22c2af7b630c3e.mockapi.io/api/v1
+```
+3. Run
+```node
+pnpm start
+```

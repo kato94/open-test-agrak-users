@@ -22,6 +22,6 @@ export const MODAL_OPTIONS: ModalOptions = {
   error: {
     title: 'ERROR!',
     color: 'red',
-    icon: 'fluent-error-16-filled',
+    icon: 'fluent-shield-error-16-regular',
   },
 };
